@@ -1,9 +1,9 @@
 ﻿using RestWithASPNetUdemy.Model;
 using System.Collections.Generic;
 
-namespace RestWithASPNetUdemy.Services
+namespace RestWithASPNetUdemy.Business
 {
-    public interface IPersonService
+    public interface IPersonBusiness
     {
         Person Create(Person person);
         Person FindById(long id);
