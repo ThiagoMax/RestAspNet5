@@ -12,7 +12,6 @@ using RestWithASPNetUdemy.Business;
 using RestWithASPNetUdemy.Business.Implementations;
 using RestWithASPNetUdemy.Model.Context;
 using RestWithASPNetUdemy.Repository;
-using RestWithASPNetUdemy.Repository.Implementations;
 using RWANU.Repository.Generic;
 using Serilog;
 using System;
@@ -55,7 +54,6 @@ namespace RestWithASPNetUdemy
 
             // Dependecy injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
 
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));

@@ -11,7 +11,6 @@ namespace RestWithASPNetUdemy.Repository
         List<T> FindAll();
         T Update(T item);
         void Delete(long id);
-
         bool Exists(long id);
     }
 }
