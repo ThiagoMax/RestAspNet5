@@ -1,6 +1,8 @@
 ﻿using RestWithASPNetUdemy.Model;
 using RestWithASPNetUdemy.Model.Context;
 using RestWithASPNetUdemy.Repository;
+using RWANU.Data.Converter.Implementations;
+using RWANU.Data.VO;
 using RWANU.Model;
 using System;
 using System.Collections.Generic;
@@ -13,31 +15,37 @@ namespace RestWithASPNetUdemy.Business.Implementations
     public class BooksBusinessImplementation : IBooksBusiness
     {
         private readonly IRepository<Books> _repository;
+        private readonly BooksConverter _converter;
         
         public BooksBusinessImplementation(IRepository<Books> repository) 
         {
             _repository = repository;
+            _converter = new BooksConverter();
         }
 
-        public List<Books> FindAll()
+        public List<BooksVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.Parse(_repository.FindAll());
         }
 
-        public Books FindById(long id)
+        public BooksVO FindById(long id)
         {
 
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
-        public Books Create(Books book)
+        public BooksVO Create(BooksVO book)
         {
-            return _repository.Create(book);
+            var booksEntity = _converter.Parse(book);
+            booksEntity = _repository.Create(booksEntity);
+            return _converter.Parse(booksEntity);
         }
 
-        public Books Update(Books book)
+        public BooksVO Update(BooksVO book)
         {
-            return _repository.Update(book);
+            var booksEntity = _converter.Parse(book);
+            booksEntity = _repository.Update(booksEntity);
+            return _converter.Parse(booksEntity);
         }
 
         public void Delete(long id)

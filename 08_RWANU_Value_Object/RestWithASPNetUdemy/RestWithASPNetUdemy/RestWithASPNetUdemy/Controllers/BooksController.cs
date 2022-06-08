@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RWANU.Model;
+using RWANU.Data.VO;
 
 namespace RestWithASPNetUdemy.Controllers
 {
@@ -39,14 +40,14 @@ namespace RestWithASPNetUdemy.Controllers
         }
         
         [HttpPost]
-        public IActionResult Post([FromBody] Books book)
+        public IActionResult Post([FromBody] BooksVO book)
         {
             if(book == null) return BadRequest();
             return Ok(_booksBusiness.Create(book));
         }
         
         [HttpPut]
-        public IActionResult Put([FromBody] Books book)
+        public IActionResult Put([FromBody] BooksVO book)
         {
             if(book == null) return BadRequest();
             return Ok(_booksBusiness.Update(book));
