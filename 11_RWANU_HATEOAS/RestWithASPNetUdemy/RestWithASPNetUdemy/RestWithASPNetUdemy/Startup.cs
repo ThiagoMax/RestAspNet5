@@ -13,6 +13,8 @@ using RestWithASPNetUdemy.Business;
 using RestWithASPNetUdemy.Business.Implementations;
 using RestWithASPNetUdemy.Model.Context;
 using RestWithASPNetUdemy.Repository;
+using RWANU.Hypermedia.Enricher;
+using RWANU.Hypermedia.Filters;
 using RWANU.Repository.Generic;
 using Serilog;
 using System;
@@ -59,7 +61,14 @@ namespace RestWithASPNetUdemy
                 options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
             })
             .AddXmlSerializerFormatters();
-            
+
+            var filterOptions = new HyperMediaFiltersOptions();
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+            filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
+
+            services.AddSingleton(filterOptions);
+
+            // Versioning API
             services.AddApiVersioning();
 
             // Dependecy injection
@@ -86,6 +95,7 @@ namespace RestWithASPNetUdemy
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }
 

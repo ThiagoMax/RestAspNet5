@@ -15,6 +15,7 @@ namespace RWANU.Data.Converter.Implementations
             if (origin == null) return null;
             return new Books
             {
+                Id = origin.Id,
                 Author = origin.Author,
                 LaunchDate = origin.LaunchDate,
                 Price = origin.Price,
@@ -27,6 +28,7 @@ namespace RWANU.Data.Converter.Implementations
             if (origin == null) return null;
             return new BooksVO
             {
+                Id = origin.Id,
                 Author = origin.Author,
                 LaunchDate = origin.LaunchDate,
                 Price = origin.Price,

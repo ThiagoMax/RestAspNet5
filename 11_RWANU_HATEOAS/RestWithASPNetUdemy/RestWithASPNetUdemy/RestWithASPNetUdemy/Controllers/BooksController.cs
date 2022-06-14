@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RWANU.Model;
 using RWANU.Data.VO;
+using RWANU.Hypermedia.Filters;
 
 namespace RestWithASPNetUdemy.Controllers
 {
@@ -26,12 +27,14 @@ namespace RestWithASPNetUdemy.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_booksBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var book = _booksBusiness.FindById(id);
@@ -40,6 +43,7 @@ namespace RestWithASPNetUdemy.Controllers
         }
         
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BooksVO book)
         {
             if(book == null) return BadRequest();
@@ -47,6 +51,7 @@ namespace RestWithASPNetUdemy.Controllers
         }
         
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BooksVO book)
         {
             if(book == null) return BadRequest();
