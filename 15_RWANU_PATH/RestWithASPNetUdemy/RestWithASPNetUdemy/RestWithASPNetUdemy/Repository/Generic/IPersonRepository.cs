@@ -1,10 +1,8 @@
 ﻿using RestWithASPNetUdemy.Model;
-using RWANU.Model.Base;
-using System.Collections.Generic;
 
 namespace RestWithASPNetUdemy.Repository
 {
-    public interface IPersonRepository : IRepository<Person>
+    public interface IPersonRepository : IPersonRepository<Person>
     {
         Person Disable(long id);
     }

@@ -17,6 +17,7 @@ using RestWithASPNetUdemy.Model.Context;
 using RestWithASPNetUdemy.Repository;
 using RWANU.Hypermedia.Enricher;
 using RWANU.Hypermedia.Filters;
+using RWANU.Repository;
 using RWANU.Repository.Generic;
 using Serilog;
 using System;
@@ -97,7 +98,10 @@ namespace RestWithASPNetUdemy
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
 
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IPersonRepository, PersonRepository>();
+
+            services.AddScoped(typeof(IPersonRepository<>), typeof(GenericRepository<>));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

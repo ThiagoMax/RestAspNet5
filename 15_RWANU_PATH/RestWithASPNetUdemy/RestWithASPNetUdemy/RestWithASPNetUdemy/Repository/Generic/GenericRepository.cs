@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace RWANU.Repository.Generic
 {
-    public class GenericRepository<T> : IRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IPersonRepository<T> where T : BaseEntity
     {
         protected MySQLContext _context;
         private DbSet<T> dataset;
