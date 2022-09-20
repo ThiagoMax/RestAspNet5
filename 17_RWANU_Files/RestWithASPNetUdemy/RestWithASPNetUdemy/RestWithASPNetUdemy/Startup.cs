@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
@@ -15,6 +17,8 @@ using RestWithASPNetUdemy.Business;
 using RestWithASPNetUdemy.Business.Implementations;
 using RestWithASPNetUdemy.Model.Context;
 using RestWithASPNetUdemy.Repository;
+using RWANU.Business;
+using RWANU.Business.Implementations;
 using RWANU.Hypermedia.Enricher;
 using RWANU.Hypermedia.Filters;
 using RWANU.Repository;
@@ -95,8 +99,11 @@ namespace RestWithASPNetUdemy
             });
 
             // Dependecy injection
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
+            services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
             services.AddScoped<IPersonRepository, PersonRepository>();
 
