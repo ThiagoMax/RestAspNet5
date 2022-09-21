@@ -19,9 +19,10 @@ namespace RWANU.Business.Implementations
             _basePath = Directory.GetCurrentDirectory() + "\\UploadDir\\";
         }
 
-        public byte[] GetFile(string name)
+        public byte[] GetFile(string fileName)
         {
-            throw new NotImplementedException();
+            var filePath = _basePath + fileName;
+            return File.ReadAllBytes(filePath);
         }
 
         public async Task<FileDetailVO> SaveFileToDisk(IFormFile file)
@@ -49,9 +50,15 @@ namespace RWANU.Business.Implementations
             return fileDetail;
         }
 
-        public Task<List<FileDetailVO>> SaveMultFileToDisk(IList<IFormFile> file)
+        public async Task<List<FileDetailVO>> SaveMultFilesToDisk(IList<IFormFile> files)
         {
-            throw new NotImplementedException();
+            List<FileDetailVO> list = new List<FileDetailVO>();
+            
+            foreach (var f in files)
+            {
+                list.Add(await SaveFileToDisk(f));
+            }
+            return list;
         }
     }
 }

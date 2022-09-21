@@ -11,6 +11,6 @@ namespace RWANU.Business
     {
         public byte[] GetFile(string name);
         public Task<FileDetailVO> SaveFileToDisk(IFormFile file);
-        public Task<List<FileDetailVO>> SaveMultFileToDisk(IList<IFormFile> file);
+        public Task<List<FileDetailVO>> SaveMultFilesToDisk(IList<IFormFile> file);
     }
 }
